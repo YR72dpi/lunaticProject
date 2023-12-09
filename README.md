@@ -1,6 +1,11 @@
+<!-- L'idée c'est que ce soit autonome, même s'il n'y a pas de source organique -->
+<!-- Installation simple via docker -->
+<!-- Organiser les source en deux dossier -->
+<!-- Un fichier par algo -->
+
 # LunaticProject
 
-LunaticProject est un projet collaboratif permettant de générer un nombre aléatoire à partir de d'autres nombres générés aléatoirement de manière organique et informatique Selon différents procédés généré par le serveur et par les utilisateurs.
+LunaticProject is a collaborative project for generating a random number from other randomly generated numbers, both organically and computationally, according to various server-generated and user-generated processes.
 
 ## Une entrée, une sortie
 
@@ -62,7 +67,23 @@ Ideas :
 ### Get  
 
 ```url
-[DOMAIN]/get
-[DOMAIN]/get?numberDigit=3
-[DOMAIN]/get?min=1&max=999
+[DOMAIN]/api/get
+[DOMAIN]/api/get?numberDigit=3
+[DOMAIN]/api/get?min=1&max=999
 ```
+
+## Installation
+
+Run the docker compose.
+
+At installatoin, 1k numbers gonna be generate by server.
+
+## DataBase
+
+| id | origin | datatime | number |
+|--|--|--|--|
+| 1 | organic   | ... | 78
+| 2 | server    | ... | 789
+| 3 | server    | ... | 7159
+| 4 | organic   | ... | 3894
+| 5 | organic   | ... | 5878
