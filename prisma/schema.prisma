@@ -6,3 +6,10 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model number {
+  id       Int      @id @default(autoincrement())
+  origin   String
+  datetime DateTime @default(now())
+  number   Int
+}
