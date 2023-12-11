@@ -80,7 +80,7 @@ At installatoin, 1k numbers gonna be generate by server.
 
 ## DataBase
 
-| id | origin | datatime | number |
+| id | origin | datetime | number |
 |--|--|--|--|
 | 1 | organic   | ... | 78
 | 2 | server    | ... | 789
