@@ -7,7 +7,8 @@ import { PrismaClient } from '@prisma/client'
 const router = express.Router();
 const prisma = new PrismaClient()
 
-
+// TODO : faire une page swager genre, avec un ptit MVPcss
+// https://www.youtube.com/watch?v=of16K6SM_EA&ab_channel=DevTheory
 router.get('/', (req, res) => {
   res.send('Bienvenue sur ma route principale!');
 });
@@ -32,6 +33,8 @@ router.get('/get', async (req, res) => {
  *          All POST ROUTE
  */
 
+// Passer en POST et mettre un csrf
+//https://www.npmjs.com/package/csrf
 router.get('/give', async (req, res) => {
     logger.info('[SERVER] GET /give?number=x');
     let randomNumber = parseInt(req.query.number)
