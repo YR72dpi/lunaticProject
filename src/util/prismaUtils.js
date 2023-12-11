@@ -3,7 +3,6 @@ import logger from '../util/logger.js';
 
 const prisma = new PrismaClient()
 
-// Simple random
 export const addNumber = async (number) => {
     try {
         await prisma.number.create({
@@ -14,7 +13,7 @@ export const addNumber = async (number) => {
         })
         return true
     } catch (error) {
-        logger.error('Erreur dans /give:', error);
+        logger.error('Error in addNumber:', error);
         throw new Error('Not Saved');
     }
 }

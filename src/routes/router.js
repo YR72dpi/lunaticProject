@@ -36,22 +36,25 @@ router.get('/get', async (req, res) => {
 // Passer en POST et mettre un csrf
 //https://www.npmjs.com/package/csrf
 router.get('/give', async (req, res) => {
-    logger.info('[ORGANIC] GET /give?number=x');
-    let randomNumber = parseInt(req.query.number)
-    if(Number.isInteger(randomNumber)) {
-       try {
-        addNumber(randomNumber)
-        res.json({
-            msg: 'ok'
-        })
-       } catch (error) {
-            res.status(500).json({
-                msg: error
+    try {
+        logger.info('[ORGANIC] GET /give?number=x');
+
+        const randomNumber = parseInt(req.query.number);
+
+        if (Number.isInteger(randomNumber)) {
+            await addNumber(randomNumber);
+            res.json({
+                msg: 'ok'
             });
-       }
-    } else {
+        } else {
+            res.status(400).json({
+                msg: "Integer only"
+            });
+        }
+    } catch (error) {
+        logger.error('Error in /give:', error);
         res.status(500).json({
-            msg: "Integer only"
+            msg: 'Internal Server Error'
         });
     }
 })
