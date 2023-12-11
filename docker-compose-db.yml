@@ -2,11 +2,14 @@ version: '3'
 
 services:
   database:
-    image: postgres:${POSTGRES_VERSION:-15}-alpine
+    image: postgres:15-alpine
+    restart: always
+    ports:
+      - "5432:5432"
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
-      POSTGRES_USER: ${POSTGRES_USER:-app}
+      POSTGRES_DB: lunatic
+      POSTGRES_PASSWORD: lunatic
+      POSTGRES_USER: root
     volumes:
       - database_data:/var/lib/postgresql/data:rw
 
