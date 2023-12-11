@@ -1,22 +1,57 @@
 import express from 'express';
 import logger from '../util/logger.js';
-import { simpleRandom } from '../util/random.js';
+import { simpleRandom } from '../util/serverAlgo.js';
+import { addNumber } from '../util/prismaUtils.js';
+import { PrismaClient } from '@prisma/client'
 
 const router = express.Router();
+const prisma = new PrismaClient()
+
 
 router.get('/', (req, res) => {
   res.send('Bienvenue sur ma route principale!');
 });
 
-router.get('/randomNumber', async (req, res) => {
-    logger.info('Get randomNumber route');
+/**
+ *          All GET ROUTE
+ */
+
+router.get('/get', async (req, res) => {
+    logger.info('[SERVER] GET /get');
     try {
         const randomNumber = await simpleRandom();
         res.json(randomNumber);
     } catch (error) {
-        logger.error('Erreur dans simpleRandom:', error);
+        logger.error('Erreur dans /get:', error);
         res.status(500).send('Erreur interne du serveur');
     }
 })
+
+
+/**
+ *          All POST ROUTE
+ */
+
+router.get('/give', async (req, res) => {
+    logger.info('[SERVER] GET /give?number=x');
+    let randomNumber = parseInt(req.query.number)
+    if(Number.isInteger(randomNumber)) {
+       try {
+        addNumber(randomNumber)
+        res.json({
+            msg: 'ok'
+        })
+       } catch (error) {
+            res.status(500).json({
+                msg: error
+            });
+       }
+    } else {
+        res.status(500).json({
+            msg: "Integer only"
+        });
+    }
+})
+
 
 export default router;
