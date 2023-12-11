@@ -7,7 +7,8 @@ import { PrismaClient } from '@prisma/client'
 const router = express.Router();
 const prisma = new PrismaClient()
 
-
+// TODO : faire une page swager genre, avec un ptit MVPcss
+// https://www.youtube.com/watch?v=of16K6SM_EA&ab_channel=DevTheory
 router.get('/', (req, res) => {
   res.send('Bienvenue sur ma route principale!');
 });
