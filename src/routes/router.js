@@ -36,7 +36,7 @@ router.get('/get', async (req, res) => {
 // Passer en POST et mettre un csrf
 //https://www.npmjs.com/package/csrf
 router.get('/give', async (req, res) => {
-    logger.info('[SERVER] GET /give?number=x');
+    logger.info('[ORGANIC] GET /give?number=x');
     let randomNumber = parseInt(req.query.number)
     if(Number.isInteger(randomNumber)) {
        try {
