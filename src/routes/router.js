@@ -10,7 +10,7 @@ const prisma = new PrismaClient()
 // TODO : faire une page swager genre, avec un ptit MVPcss
 // https://www.youtube.com/watch?v=of16K6SM_EA&ab_channel=DevTheory
 router.get('/', (req, res) => {
-  res.send('Bienvenue sur ma route principale!');
+    res.send('Bienvenue sur ma route principale!');
 });
 
 /**
@@ -51,6 +51,40 @@ router.get('/give', async (req, res) => {
                 msg: "Integer only"
             });
         }
+    } catch (error) {
+        logger.error('Error in /give:', error);
+        res.status(500).json({
+            msg: 'Internal Server Error'
+        });
+    }
+})
+
+router.get('/giveMany', async (req, res) => {
+    try {
+        logger.info('[ORGANIC] GET /giveMany?number=x-y-z');
+
+        const randomNumber = req.query.number.split("-");
+
+        let onlyIntegerGiven = true;
+        randomNumber.forEach(async (number) => {
+            number = parseInt(number)
+            if (Number.isInteger(number)) {
+                await addNumber(number);
+            } else {
+                onlyIntegerGiven = false;
+            }
+        });
+
+        if(onlyIntegerGiven) {
+            res.json({
+                msg: 'ok'
+            });
+        }else {
+            res.status(400).json({
+                msg: "Integer only"
+            });
+        }
+
     } catch (error) {
         logger.error('Error in /give:', error);
         res.status(500).json({
