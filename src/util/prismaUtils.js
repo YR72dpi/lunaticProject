@@ -17,3 +17,19 @@ export const addNumber = async (number) => {
         throw new Error('Not Saved');
     }
 }
+
+export const dbConnectionTest = async () => {
+    logger.info("DB Connection Test : START");
+    try {
+        await prisma.$connect();
+        logger.info('Connected to the database');
+    } catch (error) {
+        logger.error('Error connecting to the database:', error);
+        return false;
+    } finally {
+        await prisma.$disconnect();
+        logger.info("DB Connection Test : END");
+    }
+
+    return true
+}
