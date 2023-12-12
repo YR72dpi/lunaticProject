@@ -33,7 +33,7 @@ router.get('/get', async (req, res) => {
  *          All POST ROUTE
  */
 
-// Passer en POST et mettre un csrf
+// TODO : Passer en POST et mettre un csrf
 //https://www.npmjs.com/package/csrf
 router.get('/give', async (req, res) => {
     try {
