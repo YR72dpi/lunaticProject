@@ -1,6 +1,6 @@
 import express from 'express';
 import logger from '../util/logger.js';
-import { simpleRandom } from '../util/serverAlgo.js';
+import { simpleRandom, crossRandom } from '../util/serverAlgo.js';
 import { addNumber } from '../util/prismaUtils.js';
 import { PrismaClient } from '@prisma/client'
 
@@ -17,11 +17,21 @@ router.get('/', (req, res) => {
  *          All GET ROUTE
  */
 
+const functionCollection = {
+    simpleRandom,
+    crossRandom
+}
+
 router.get('/get', async (req, res) => {
     logger.info('[SERVER] GET /get');
     try {
-        const randomNumber = await simpleRandom();
-        res.json(randomNumber);
+        const functionCollectionName = Object.keys(functionCollection)
+        const functionSelected = functionCollectionName[await simpleRandom(0, functionCollectionName.length)]
+        const randomNumber = await functionCollection[functionSelected]()
+        res.json({
+            number: randomNumber,
+            origin: functionSelected
+        });
     } catch (error) {
         logger.error('Erreur dans /get:', error);
         res.status(500).send('Erreur interne du serveur');
