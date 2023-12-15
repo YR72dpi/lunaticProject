@@ -30,8 +30,6 @@ export const crossRandom = async () => {
         newBinToAdd += splited_n[i] ^ output[i]
     }
     output += newBinToAdd
-    
+
     return parseInt(output, 2)
 }
-
-console.log(await crossRandom())
