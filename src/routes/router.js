@@ -7,7 +7,8 @@ import {
     crossRandom,
     randomLowEntropy,
     randomMediumEntropy,
-    randomHighEntropy
+    randomHighEntropy,
+    generateRandomNumberFromTimestamp
 } from '../randomSrc/randomServer.js';
 import {
     randomNumberApi,
@@ -35,14 +36,28 @@ const functionCollection = {
     csrng,
     randomLowEntropy,
     randomMediumEntropy,
-    randomHighEntropy
+    randomHighEntropy,
+    generateRandomNumberFromTimestamp
 }
 
+/** 
+ * Randomly choose function in "functionCollection" :
+ * http://localhost:8080/api/get
+ * Choose a spécific function :
+ * http://localhost:8080/api/get?function=crossRandom
+ */
 router.get('/get', async (req, res) => {
     try {
-        const functionCollectionName = Object.keys(functionCollection)
-        const functionSelected = functionCollectionName[await simpleRandom(0, functionCollectionName.length)]
+        let functionSelected;
+        if(req.query.function !== undefined && req.query.function !== "") {
+            functionSelected = req.query.function
+        } else {
+            const functionCollectionName = Object.keys(functionCollection)
+            functionSelected = functionCollectionName[await simpleRandom(0, functionCollectionName.length)]
+        }
+
         const randomNumber = await functionCollection[functionSelected]()
+
         logger.info('[SERVER] GET /get : ' + functionSelected);
         res.json({
             number: randomNumber,
@@ -53,6 +68,11 @@ router.get('/get', async (req, res) => {
         res.status(500).send('Erreur interne du serveur');
     }
 })
+
+/**
+ * TODO : make a route for choose the random generator function with get param
+ * @var function
+ */
 
 
 /**
