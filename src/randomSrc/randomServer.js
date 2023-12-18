@@ -1,5 +1,5 @@
 import * as crypto from 'node:crypto'
-
+import seedRandom from 'seed-random';
 
 // Simple random
 export const simpleRandom = async (x = 0, y = 999) => x + Math.floor(Math.random() * (y - x))
@@ -67,10 +67,20 @@ export const randomMediumEntropy = async () => {
     return Math.abs(w);
 }
 
-export const randomHighEntropy = async () => {
+// chatGPT
+export const randomHighEntropy = async (x = 0, y = 999) => {
   const buffer = crypto.randomBytes(4);
-  const randomValue = buffer.readUInt32LE(0) / 0xFFFFFFFF;
-  return randomValue * 10 ** 17;
+  const calcul = (buffer.readUInt32LE(0) / 0xFFFFFFFF) * 10 ** 14;
+  const rangeCalcul = y - x;
+  const randomValue = x + Math.floor(calcul * rangeCalcul);
+  return randomValue;
 }
 
-console.log(await randomHighEntropy())
+// chatGPT
+export const generateRandomNumberFromTimestamp = async () => {
+  // Utilisez le timestamp comme graine pour la génération aléatoire
+  const randomGenerator = seedRandom(Date.now());
+  // Générez un nombre aléatoire entre 0 et 1
+  const randomNumber = randomGenerator() * 10 ** 16;
+  return randomNumber;
+}

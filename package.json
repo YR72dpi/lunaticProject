@@ -17,6 +17,7 @@
     "@prisma/client": "^5.7.0",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "seed-random": "^2.2.0",
     "winston": "^3.11.0"
   },
   "devDependencies": {
