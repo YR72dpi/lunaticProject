@@ -1,8 +1,8 @@
 import express from 'express';
 import { config } from 'dotenv';
 import router from './routes/router.js'
-import { dbConnectionTest } from './util/prismaUtils.js'
-import logger from './util/logger.js';
+import { dbConnectionTest } from './utils/prismaUtils.js'
+import logger from './utils/logger.js';
 
 
 config();

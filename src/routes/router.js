@@ -1,8 +1,18 @@
 import express from 'express';
-import logger from '../util/logger.js';
-import { simpleRandom, crossRandom } from '../util/serverAlgo.js';
-import { addNumber } from '../util/prismaUtils.js';
+import logger from '../utils/logger.js';
+import { addNumber } from '../utils/prismaUtils.js';
 import { PrismaClient } from '@prisma/client'
+import {
+    simpleRandom,
+    crossRandom,
+    randomLowEntropy,
+    randomMediumEntropy,
+    randomHighEntropy
+} from '../randomSrc/randomServer.js';
+import {
+    randomNumberApi,
+    csrng
+} from '../randomSrc/randomAPI.js';
 
 const router = express.Router();
 const prisma = new PrismaClient()
@@ -17,17 +27,23 @@ router.get('/', (req, res) => {
  *          All GET ROUTE
  */
 
+// TODO : mettre proba pour pas trop fetch les api
 const functionCollection = {
     simpleRandom,
-    crossRandom
+    crossRandom,
+    randomNumberApi,
+    csrng,
+    randomLowEntropy,
+    randomMediumEntropy,
+    randomHighEntropy
 }
 
 router.get('/get', async (req, res) => {
-    logger.info('[SERVER] GET /get');
     try {
         const functionCollectionName = Object.keys(functionCollection)
         const functionSelected = functionCollectionName[await simpleRandom(0, functionCollectionName.length)]
         const randomNumber = await functionCollection[functionSelected]()
+        logger.info('[SERVER] GET /get : ' + functionSelected);
         res.json({
             number: randomNumber,
             origin: functionSelected

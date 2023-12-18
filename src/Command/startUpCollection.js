@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import { simpleRandom } from '../util/serverAlgo.js';
+import { simpleRandom } from '../randomSrc/randomServer.js';
 
 const prisma = new PrismaClient()
 
