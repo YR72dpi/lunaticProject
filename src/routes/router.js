@@ -14,6 +14,9 @@ import {
     randomNumberApi,
     csrng
 } from '../randomSrc/randomAPI.js';
+import {
+    numberFromDb
+} from '../randomSrc/randomDB.js'
 
 const router = express.Router();
 const prisma = new PrismaClient()
@@ -37,7 +40,8 @@ const functionCollection = {
     randomLowEntropy,
     randomMediumEntropy,
     randomHighEntropy,
-    generateRandomNumberFromTimestamp
+    generateRandomNumberFromTimestamp,
+    numberFromDb
 }
 
 /** 
