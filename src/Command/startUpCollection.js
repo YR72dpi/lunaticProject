@@ -1,13 +1,15 @@
+import { simpleRandom } from "../randomSrc/randomServer.js"
+import logger from '../utils/logger.js';
 import { PrismaClient } from '@prisma/client'
-import { simpleRandom } from '../randomSrc/randomServer.js';
 
 const prisma = new PrismaClient()
 
-const x = 100;
+const x = process.env.START_NUMBER_QUANTITY;
 
 /**
  * Put x random for start the service
  */
+
 const startUpCollection = async () => {
     const randomNumber = await simpleRandom();
     try {
@@ -17,8 +19,8 @@ const startUpCollection = async () => {
               number: randomNumber,
             },
           })
-    } catch (e) {
-        console.log(e)
+    } catch (error) {
+        logger.error("Error in startUpCollection : ", error)
     }
 }
 
