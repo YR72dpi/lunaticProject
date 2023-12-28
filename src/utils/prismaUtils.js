@@ -24,7 +24,7 @@ export const dbConnectionTest = async () => {
         await prisma.$connect();
         logger.info('Connected to the database');
     } catch (error) {
-        logger.error('Error connecting to the database:', error);
+        logger.error('Error connecting to the database :', error);
         return false;
     } finally {
         await prisma.$disconnect();
