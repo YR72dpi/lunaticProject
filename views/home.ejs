@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the lunatic dashboard</h1>
+    </header>
+    <main>
+        <section>
+            <aside>
+                <h3>
+                    <center>Number of values in database</center>
+                </h3>
+                <center>
+                    <strong id="nbrValues">Chargement...</strong>
+                </center>
+            </aside>
+            <aside>
+                <h3>DateTime</h3>
+                <p>Oldest : <span id="dateTimeOldest">Chargement...</span></p>
+                <p>Latest : <span id="dateTimeLatest">Chargement...</span></p>
+            </aside>
+            <aside>
+                <h3>Origin</h3>
+                <p>Server : <span id="nbrOriginServer">Chargement...</span> </p>
+                <p>Organic : <span id="nbrOriginOrganic">Chargement...</span> </p>
+            </aside>
+        </section>
+    </main>
+
+    <script>
+        async function getData() {
+            const response = await fetch("/dev/data");
+            const data = await response.json();
+            return data;
+        }
+
+        setInterval(() => {
+            getData().then(res => {
+                document.getElementById("nbrValues").innerText = res.nbrValues
+                document.getElementById("dateTimeOldest").innerText = res.dateTimeOldest
+                document.getElementById("dateTimeLatest").innerText = res.dateTimeLatest
+                document.getElementById("nbrOriginServer").innerText = res.nbrOriginServer
+                document.getElementById("nbrOriginOrganic").innerText = res.nbrOriginOrganic
+            })
+            console.clear()
+            console.log("mise a jour " + Date())
+        }, 1000);
+          
+
+    </script>
+</body>
+</html>

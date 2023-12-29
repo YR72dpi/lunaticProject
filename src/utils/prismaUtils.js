@@ -3,7 +3,7 @@ import logger from '../utils/logger.js';
 
 const prisma = new PrismaClient()
 
-export const addNumber = async (number) => {
+export const addOrganicNumber = async (number) => {
     try {
         await prisma.number.create({
             data: {

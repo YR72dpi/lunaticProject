@@ -1,6 +1,7 @@
 import express from 'express';
 import { config } from 'dotenv';
 import router from './routes/router.js'
+import routerDev from './routes/router.dev.js'
 import { dbConnectionTest } from './utils/prismaUtils.js'
 import logger from './utils/logger.js';
 
@@ -11,6 +12,13 @@ const app = express();
 const port = process.env.PORT;
 
 app.use('/api', router);
+
+if (process.env.ENV === "dev") {
+  app.set("views", "views")
+  app.set("view engine", "ejs")
+  app.use(express.static('public'));
+  app.use('/dev', routerDev);
+}
 
 const server = app.listen(port, () => {
   console.log(`[server]: GET simple random : http://localhost:${port}/api/get`);

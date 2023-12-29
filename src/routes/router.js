@@ -1,6 +1,6 @@
 import express from 'express';
 import logger from '../utils/logger.js';
-import { addNumber } from '../utils/prismaUtils.js';
+import { addOrganicNumber } from '../utils/prismaUtils.js';
 import { PrismaClient } from '@prisma/client'
 import {
     simpleRandom,
@@ -21,17 +21,6 @@ import {
 const router = express.Router();
 const prisma = new PrismaClient()
 
-// TODO : faire une page swager genre, avec un ptit MVPcss
-// https://www.youtube.com/watch?v=of16K6SM_EA&ab_channel=DevTheory
-router.get('/', (req, res) => {
-    res.send('Bienvenue sur ma route principale!');
-});
-
-/**
- *          All GET ROUTE
- */
-
-// TODO : mettre proba pour pas trop fetch les api
 const functionCollection = {
     simpleRandom,
     crossRandom,
@@ -73,16 +62,6 @@ router.get('/get', async (req, res) => {
     }
 })
 
-/**
- * TODO : make a route for choose the random generator function with get param
- * @var function
- */
-
-
-/**
- *          All POST ROUTE
- */
-
 // TODO : Passer en POST et mettre un csrf
 //https://www.npmjs.com/package/csrf
 router.get('/give', async (req, res) => {
@@ -92,7 +71,7 @@ router.get('/give', async (req, res) => {
         const randomNumber = parseInt(req.query.number);
 
         if (Number.isInteger(randomNumber)) {
-            await addNumber(randomNumber);
+            await addOrganicNumber(randomNumber);
             res.json({
                 msg: 'ok'
             });
