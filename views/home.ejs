@@ -8,10 +8,18 @@
 </head>
 <body>
     <header>
-        <h1>Welcome to the lunatic dashboard</h1>
+        <nav>
+            <h1>Welcome to the lunatic dashboard</h1>
+            <ul>
+                <li>Dashboard</li>
+                <li><a href="/dev/dbContent">Database Content</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
+        <h2>Database</h2>
         <section>
+            <p><small>Data refesh : <span id="refreshTimeStamp">Chargement...</span></small></p>
             <aside>
                 <h3>
                     <center>Number of values in database</center>
@@ -31,28 +39,98 @@
                 <p>Organic : <span id="nbrOriginOrganic">Chargement...</span> </p>
             </aside>
         </section>
+        <script>
+            async function getData() {
+                const response = await fetch("/dev/data");
+                const data = await response.json();
+                return data;
+            }
+
+            setInterval(() => {
+                getData().then(res => {
+                    document.getElementById("nbrValues").innerText = res.nbrValues
+                    document.getElementById("dateTimeOldest").innerText = res.dateTimeOldest
+                    document.getElementById("dateTimeLatest").innerText = res.dateTimeLatest
+                    document.getElementById("nbrOriginServer").innerText = res.nbrOriginServer
+                    document.getElementById("nbrOriginOrganic").innerText = res.nbrOriginOrganic
+                })
+                document.getElementById("refreshTimeStamp").innerText = Date()
+            }, 1000)
+        </script>
+
+        <hr>
+        <h2>Test</h2>
+        <section>
+            <aside>
+                <h3>GET</h3>
+                <p><small>/api/get</small></p>
+                <p>
+                    Response : 
+                    <code id="get">
+                        // click start to fetch tis link
+                    </code>
+                </p>
+                <button id="fetchGet">start</button>
+                <script>
+                    document.getElementById("fetchGet").addEventListener("click", (e) => {
+                        let data = fetch("/api/get").then(data => {
+                            data.json().then(json => {
+                                document.getElementById("get").innerText = JSON.stringify(json)
+                            })
+                        })
+                    })
+                </script>
+            </aside>
+            <aside>
+                <h3>GET special function</h3>
+                <p><small>/api/get?function=<span id="functionNameShow">simpleRandom</span></small></p>
+                <p>
+                    Response :
+                    <code id="getFunction">
+                        // click start to fetch tis link
+                    </code>
+                </p>
+                                
+                <details>
+                    <summary>Change function</summary>
+                    <fieldset>
+                        <label for="functionNameInput">Function name</label>
+                        <input type="text" placeholder="Function name" id="functionNameInput" value="simpleRandom">
+                    </fieldset>
+                </details>
+                <button id="fetchGetFunction">start</button>
+                <script>
+                    document.getElementById("functionNameInput").addEventListener("keydown", (e) => {
+                        document.getElementById("functionNameShow").innerText = e.target.value
+                    })
+                    document.getElementById("functionNameInput").addEventListener("keyup", (e) => {
+                        document.getElementById("functionNameShow").innerText = e.target.value
+                    })
+                    document.getElementById("fetchGetFunction").addEventListener("click", (e) => {
+                        let inputValue = document.getElementById("functionNameInput").value
+                        let data = fetch("/api/get?function=" + inputValue).then(data => {
+                            data.json().then(json => {
+                                document.getElementById("getFunction").innerText = JSON.stringify(json)
+                            })
+                        })
+                    })
+                </script>
+            </aside>
+        </section>
+        <section>
+            <aside>
+                <h3>GIVE</h3>
+            </aside>
+            <aside>
+                <h3>GIVE many</h3>
+            </aside>
+        </section>
     </main>
-
-    <script>
-        async function getData() {
-            const response = await fetch("/dev/data");
-            const data = await response.json();
-            return data;
-        }
-
-        setInterval(() => {
-            getData().then(res => {
-                document.getElementById("nbrValues").innerText = res.nbrValues
-                document.getElementById("dateTimeOldest").innerText = res.dateTimeOldest
-                document.getElementById("dateTimeLatest").innerText = res.dateTimeLatest
-                document.getElementById("nbrOriginServer").innerText = res.nbrOriginServer
-                document.getElementById("nbrOriginOrganic").innerText = res.nbrOriginOrganic
-            })
-            console.clear()
-            console.log("mise a jour " + Date())
-        }, 1000);
-          
-
-    </script>
+    <footer>
+        <hr>
+        <p>
+            <a href="https://github.com/YR72dpi/lunaticProject">Github</a>
+        </p>
+    </footer>
 </body>
 </html>

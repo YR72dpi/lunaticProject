@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Database</h1>
+            <ul>
+                <li><a href="/dev/">Dashboard</a></li>
+                <li>Database Content</li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+        <center>
+            <p><small>Data refesh : <span id="refreshTimeStamp">Chargement...</span></small></p>
+
+            <table id="databaseContent">
+                <caption id="databaseContent-caption">Database content</caption>
+                <tr>
+                    <th>id</th>
+                    <th>Number</th>
+                    <th>Origin</th>
+                    <th>Datetime</th>
+                </tr>
+                
+               </table>
+        </center>
+        </section>
+        <script>
+            async function getData() {
+                const response = await fetch("/dev/data");
+                const data = await response.json();
+                return data;
+            }
+
+            setInterval(() => {
+                getData().then(res => {
+                    document.getElementById("databaseContent-caption").innerText = res.nbrValues + " values"
+                    let allTr = document.querySelectorAll("#databaseContent tr:has(td)")
+                    allTr.forEach((tr) => {
+                        tr.remove()
+                    })
+
+                    res.allNbr.map((data) => {
+                        let table = document.getElementById("databaseContent")
+                        var newRow = table.insertRow();
+                        var idCell = newRow.insertCell();
+                        var numberCell = newRow.insertCell();
+                        var originCell = newRow.insertCell();
+                        var datetimeCell = newRow.insertCell();
+
+                        idCell.innerText = data.id
+                        numberCell.innerText = data.number
+                        originCell.innerText = data.origin
+                        datetimeCell.innerText = data.datetime
+                    })
+                })
+                document.getElementById("refreshTimeStamp").innerText = Date()
+            }, 1000)
+        </script>
+</body>
+</html>

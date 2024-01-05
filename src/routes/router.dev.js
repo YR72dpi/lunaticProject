@@ -7,7 +7,11 @@ const prisma = new PrismaClient()
 // TODO : faire une page swager genre, avec un ptit MVPcss
 // https://www.youtube.com/watch?v=of16K6SM_EA&ab_channel=DevTheory
 routerDev.get('/', (req, res) => {
-    res.render('home');
+  res.render('home');
+});
+
+routerDev.get('/dbContent', (req, res) => {
+  res.render('dbContent');
 });
 
 routerDev.get('/data', async (req, res) => {
@@ -51,12 +55,15 @@ routerDev.get('/data', async (req, res) => {
         }
     })
 
+    const allNbr = await prisma.number.findMany()
+
     res.json({
         nbrValues: nbrOriginServer + nbrOriginOrganic,
         dateTimeOldest: dateTimeOldest,
         dateTimeLatest: dateTimeLatest,
         nbrOriginServer: nbrOriginServer,
-        nbrOriginOrganic: nbrOriginOrganic
+        nbrOriginOrganic: nbrOriginOrganic,
+        allNbr : allNbr
     });
 });
 
