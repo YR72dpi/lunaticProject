@@ -7,7 +7,13 @@
 
 LunaticProject is a collaborative project for generating a random number from other randomly generated numbers, both organically and computationally, according to various server-generated and user-generated processes.
 
-## Une entrée, une sortie
+## Random source
+
+Ideas : 
+- From x and y coordonate (re-randomised) mouth's move
+- From Tweet/redit converted in integer
+
+## One entry, one exit
 
 ```mermaid
 graph LR
@@ -37,27 +43,9 @@ ApiGet -- Return --> User
 
 ```
 
-## Random source
-
-### Organic Random
-
-Ideas : 
-- From x and y coordonate (re-randomised) mouth's move
-- From Tweet converted in integer
-
-### Server Random
-
-Ideas :
-- Random function from programation language
-- Re-compute from already saved number
-    - Multiply
-    - Xor
-- Other Service random number
-- From IA images
-
 ## Request
 
-### Post  
+### Add  
 
 ```url
 [DOMAIN]/give?number=1
@@ -67,9 +55,10 @@ Ideas :
 ### Get  
 
 ```url
+// Get from all function referenced
 [DOMAIN]/api/get
-[DOMAIN]/api/get?numberDigit=3
-[DOMAIN]/api/get?min=1&max=999
+// Get from a specific function
+[DOMAIN]/api/get?function=simpleRandom
 ```
 
 ## Installation
@@ -78,7 +67,20 @@ Run the docker compose.
 
 At installatoin, 1k numbers gonna be generate by server.
 
+```
+sudo docker compose up
+npm run start
+npm run start-up
+```
+
+## Developement Dashboard
+
+On develop environment go to `/dev/`
+
 ## DataBase
+
+__To know more__ :
+When a random number from the database is called, a check is made to see if there are enough numbers in the database. If there are less than half of START_NUMBER_QUANTITY then it adds half.
 
 | id | origin | datetime | number |
 |--|--|--|--|
@@ -87,3 +89,27 @@ At installatoin, 1k numbers gonna be generate by server.
 | 3 | server    | ... | 7159
 | 4 | organic   | ... | 3894
 | 5 | organic   | ... | 5878
+
+## Add your function
+
+In `/src/randomSrc/FILE_NAME.js` add a function like
+```javascript
+export const yourFunction = async () => {
+    return number
+}
+```
+then import it into /src/routes/router.js like 
+```javascript
+import {
+    yourFunction
+} from '../randomSrc/FILE_NAME.js'
+```
+and add the name function in `functionCollection`
+```javascript
+const functionCollection = {
+    ...,
+    yourFunction
+}
+```
+
+When you get `/api/get`, your function gonna be randomly selected.
