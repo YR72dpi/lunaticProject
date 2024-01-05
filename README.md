@@ -24,9 +24,7 @@ graph LR
     db[(Database)]
     ApiGet[Api GET]
     serverRandom[(Random Server Generation)]
-    randomChoice((Function 
-        Randomly 
-        Selected))
+    randomChoice((Function Randomly Selected))
 
     subgraph Server
         API[Api POST] --> db[(Database)] 
