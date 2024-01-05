@@ -20,8 +20,6 @@ graph LR
 
     Organic((Organic))
     Organic1((Organic 1))
-    Organic2((Organic 2))
-    Organic3((Organic 3))
     API[Api POST]
     db[(Database)]
     ApiGet[Api GET]
@@ -40,17 +38,11 @@ graph LR
     subgraph Organic Giver
         Organic --> API
         Organic1 --> API
-        Organic2 --> API
-        Organic3 --> API
     end
 
     subgraph Client
         client[client] -- GET -->ApiGet
     end
-
-
-
-
 ```
 
 ## Request
