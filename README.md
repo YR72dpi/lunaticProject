@@ -17,28 +17,38 @@ Ideas :
 
 ```mermaid
 graph LR
-Organic((Organic))
-Organic1((Organic 1))
-Organic2((Organic 2))
-Organic3((Organic 3))
 
-
-subgraph Server
-    API[Api POST] --> ServerRandom[Server Random] --> Save[(Save)] 
+    Organic((Organic))
+    Organic1((Organic 1))
+    Organic2((Organic 2))
+    Organic3((Organic 3))
+    API[Api POST]
+    db[(Database)]
     ApiGet[Api GET]
+    serverRandom[(Random Server Generation)]
+    randomChoice{Function 
+        Randomly 
+        Selected} 
 
-    ApiGet -- Fetch --> Save -- Return --> ApiGet
-end
+    subgraph Server
+        API[Api POST] --> db[(Database)] 
+        randomChoice -- db selected --> db
+        randomChoice -- serverr selected --> serverRandom
+        ApiGet --> randomChoice
+    end
 
-subgraph Organic Giver
-    Organic --> API
-    Organic1 --> API
-    Organic2 --> API
-    Organic3 --> API
-end
+    subgraph Organic Giver
+        Organic --> API
+        Organic1 --> API
+        Organic2 --> API
+        Organic3 --> API
+    end
 
-User -- GET --> ApiGet 
-ApiGet -- Return --> User
+    subgraph Client
+        client[client] -- GET -->ApiGet
+    end
+
+
 
 
 ```
