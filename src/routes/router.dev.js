@@ -55,7 +55,11 @@ routerDev.get('/data', async (req, res) => {
         }
     })
 
-    const allNbr = await prisma.number.findMany()
+    const allNbr = await prisma.number.findMany({
+      orderBy: {
+        datetime: 'desc',
+      }
+    })
 
     res.json({
         nbrValues: nbrOriginServer + nbrOriginOrganic,
