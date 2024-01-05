@@ -28,8 +28,8 @@ graph LR
 
     subgraph Server
         API[Api POST] --> db[(Database)] 
-        randomChoice -- db selected --> db
-        randomChoice -- serverr selected --> serverRandom
+        randomChoice -- DB Selected --> db
+        randomChoice -- Server Selected --> serverRandom
         ApiGet --> randomChoice
     end
 
