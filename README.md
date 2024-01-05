@@ -2,6 +2,7 @@
 <!-- Installation simple via docker -->
 <!-- Organiser les source en deux dossier -->
 <!-- Un fichier par algo -->
+<!-- faire un autre depots pour faiee un giver rtl-sdr -->
 
 # LunaticProject
 

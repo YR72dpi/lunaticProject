@@ -84,3 +84,26 @@ export const generateRandomNumberFromTimestamp = async () => {
   const randomNumber = randomGenerator() * 10 ** 16;
   return randomNumber;
 }
+
+export const vonNeumannRandom = async (seed = null, length = 3) =>{
+    let result = '';
+    let currentSeed = seed === null ? await simpleRandom() : seed.toString();
+  
+    for (let i = 0; i < length; i++) {
+      // Square the current seed
+      currentSeed = (parseInt(currentSeed) ** 2).toString();
+  
+      // Extract the middle digits
+      const middleIndex = Math.floor(currentSeed.length / 2);
+      const middleDigits = currentSeed.slice(middleIndex - 1, middleIndex + 1);
+  
+      // Append the middle digits to the result
+      result += middleDigits;
+    }
+  
+    // Convert the result to a number and scale it between 0 and 1
+    // const scaledResult = parseInt(result) / Math.pow(10, result.length);
+    const scaledResult = parseInt(result);
+  
+    return scaledResult;
+  }
