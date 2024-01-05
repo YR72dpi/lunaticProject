@@ -18,9 +18,6 @@ import {
     numberFromDb
 } from '../randomSrc/randomDB.js'
 
-const router = express.Router();
-const prisma = new PrismaClient()
-
 const functionCollection = {
     simpleRandom,
     crossRandom,
@@ -32,6 +29,10 @@ const functionCollection = {
     generateRandomNumberFromTimestamp,
     numberFromDb
 }
+
+
+const router = express.Router();
+const prisma = new PrismaClient()
 
 /** 
  * Randomly choose function in "functionCollection" :
