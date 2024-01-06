@@ -95,15 +95,15 @@ router.get('/give', async (req, res) => {
 
 router.get('/giveMany', async (req, res) => {
     try {
-        logger.info('[ORGANIC] GET /giveMany?number=x-y-z');
+        logger.info('[ORGANIC] GET /giveMany?numbers=x-y-z');
 
-        const randomNumber = req.query.number.split("-");
-
+        const randomNumber = req.query.numbers.split("-");
+            console.log(randomNumber)
         let onlyIntegerGiven = true;
         randomNumber.forEach(async (number) => {
             number = parseInt(number)
             if (Number.isInteger(number)) {
-                await addNumber(number);
+                await addOrganicNumber(number);
             } else {
                 onlyIntegerGiven = false;
             }

@@ -50,7 +50,7 @@ graph LR
 
 ```url
 [DOMAIN]/give?number=1
-[DOMAIN]/give?numbers=1-2-3-4-5-6-7-8-9
+[DOMAIN]/giveMany?numbers=1-2-3-4-5-6-7-8-9
 ```
 
 ### Get  
