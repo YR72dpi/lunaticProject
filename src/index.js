@@ -12,6 +12,13 @@ const app = express();
 const port = process.env.PORT;
 
 app.use('/api', router);
+app.get("/", async (req, res) => {
+  if (process.env.ENV === "dev") {
+    res.redirect("/dev")
+  } else {
+    res.redirect("/api/get")
+  }
+})
 
 if (process.env.ENV === "dev") {
   app.set("views", "views")
