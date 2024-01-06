@@ -1,5 +1,8 @@
 import * as crypto from 'node:crypto'
 import seedRandom from 'seed-random';
+import { config } from 'dotenv';
+
+config()
 
 // Simple random
 export const simpleRandom = async (x = 0, y = 999) => x + Math.floor(Math.random() * (y - x))
@@ -107,3 +110,17 @@ export const vonNeumannRandom = async (seed = null, length = 3) =>{
   
     return scaledResult;
   }
+
+export const timestampAntropyRandom = async () => {
+
+    const before = Date.now()
+    await fetch(process.env.FETCH_TIMESTAMP)
+    const random = await simpleRandom().then(number => number)
+    const after = Date.now()
+    
+    const deltaTimestamp = after - before
+    const result = random * deltaTimestamp
+    return result
+}
+
+console.log(await timestampAntropyRandom())

@@ -9,7 +9,8 @@ import {
     randomMediumEntropy,
     randomHighEntropy,
     generateRandomNumberFromTimestamp,
-    vonNeumannRandom
+    vonNeumannRandom,
+    timestampAntropyRandom
 } from '../randomSrc/randomServer.js';
 import {
     randomNumberApi,
@@ -20,16 +21,17 @@ import {
 } from '../randomSrc/randomDB.js'
 
 const functionCollection = {
-    // simpleRandom,
-    // crossRandom,
-    // randomNumberApi,
-    // csrng,
-    // randomLowEntropy,
-    // randomMediumEntropy,
-    // randomHighEntropy,
-    // generateRandomNumberFromTimestamp,
-    // numberFromDb,
-    vonNeumannRandom
+    simpleRandom,
+    crossRandom,
+    randomNumberApi,
+    csrng,
+    randomLowEntropy,
+    randomMediumEntropy,
+    randomHighEntropy,
+    generateRandomNumberFromTimestamp,
+    numberFromDb,
+    vonNeumannRandom,
+    timestampAntropyRandom
 }
 
 
