@@ -115,7 +115,7 @@ export const timestampAntropyRandom = async () => {
 
     const before = Date.now()
     await fetch(process.env.FETCH_TIMESTAMP)
-    const random = await simpleRandom().then(number => number)
+    const random = await simpleRandom()
     const after = Date.now()
     
     const deltaTimestamp = after - before
