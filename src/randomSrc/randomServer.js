@@ -122,5 +122,3 @@ export const timestampAntropyRandom = async () => {
     const result = random * deltaTimestamp
     return result
 }
-
-console.log(await timestampAntropyRandom())
