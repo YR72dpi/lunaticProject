@@ -119,7 +119,32 @@
         </section>
         <section>
             <aside>
-                <h3>GIVE</h3>
+                <h3>Give</h3>
+                <p><small>/api/give?number=<span id="randomToGive"></span></small></p>
+                <p>
+                    Response :
+                    <code id="give">
+                        // click start to fetch this link
+                    </code>
+                </p>
+                <button id="fetchGiveFunction">start</button>
+                <script>
+                    let randomToGive = Math.floor(Math.random() * 999)
+
+                    document.getElementById("randomToGive").innerText = randomToGive
+
+                    document.getElementById("fetchGiveFunction").addEventListener("click", (e) => {
+                        let inputValue = document.getElementById("functionNameInput").value
+                        let data = fetch("/api/give?number=" + randomToGive).then(data => {
+                            data.json().then(json => {
+                                document.getElementById("give").innerText = JSON.stringify(json)
+                                randomToGive = Math.floor(Math.random() * 999)
+                                document.getElementById("randomToGive").innerText = randomToGive
+                            })
+                        })
+                    })
+                </script>
+            </aside>
             </aside>
             <aside>
                 <h3>GIVE many</h3>

@@ -78,7 +78,8 @@ router.get('/give', async (req, res) => {
         if (Number.isInteger(randomNumber)) {
             await addOrganicNumber(randomNumber);
             res.json({
-                msg: 'ok'
+                msg: 'ok',
+                given: req.query.number
             });
         } else {
             res.status(400).json({
