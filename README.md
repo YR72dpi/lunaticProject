@@ -1,6 +1,6 @@
 # LunaticProject
 
-LunaticProject is a collaborative project for generating a random number from other randomly generated numbers, both organically and computationally, according to various server-generated and user-generated processes.
+LunaticProject is a collaborative project aimed at generating a random number from other randomly generated numbers, both organically and computationally (user or computer), and adding several layers of antropy.
 
 ## Random source
 
