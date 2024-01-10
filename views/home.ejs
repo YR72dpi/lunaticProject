@@ -148,6 +148,42 @@
             </aside>
             <aside>
                 <h3>GIVE many</h3>
+                <p><small>/api/giveMany?numbers=<span id="randomToGiveMany"></span></small></p>
+                <p>
+                    Response :
+                    <code id="giveMany">
+                        // click start to fetch this link
+                    </code>
+                </p>
+                <button id="fetchGiveManyFunction">start</button>
+                <script>
+                    let randomToGiveMany = [
+                        Math.floor(Math.random() * 999),
+                        Math.floor(Math.random() * 999),
+                        Math.floor(Math.random() * 999),
+                        Math.floor(Math.random() * 999),
+                        Math.floor(Math.random() * 999),
+                    ]
+
+                    document.getElementById("randomToGiveMany").innerText = randomToGiveMany.join("-")
+
+                    document.getElementById("fetchGiveManyFunction").addEventListener("click", (e) => {
+                        let inputValue = document.getElementById("functionNameInput").value
+                        let data = fetch("/api/giveMany?numbers=" + randomToGiveMany.join("-")).then(data => {
+                            data.json().then(json => {
+                                document.getElementById("giveMany").innerText = JSON.stringify(json)
+                                randomToGiveMany = [
+                                    Math.floor(Math.random() * 999),
+                                    Math.floor(Math.random() * 999),
+                                    Math.floor(Math.random() * 999),
+                                    Math.floor(Math.random() * 999),
+                                    Math.floor(Math.random() * 999),
+                                ]
+                                document.getElementById("randomToGiveMany").innerText = randomToGiveMany.join("-")
+                            })
+                        })
+                    })
+                </script>
             </aside>
         </section>
     </main>
