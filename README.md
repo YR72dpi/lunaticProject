@@ -1,9 +1,3 @@
-<!-- L'idée c'est que ce soit autonome, même s'il n'y a pas de source organique -->
-<!-- Installation simple via docker -->
-<!-- Organiser les source en deux dossier -->
-<!-- Un fichier par algo -->
-<!-- faire un autre depots pour faiee un giver rtl-sdr -->
-
 # LunaticProject
 
 LunaticProject is a collaborative project for generating a random number from other randomly generated numbers, both organically and computationally, according to various server-generated and user-generated processes.
@@ -140,3 +134,10 @@ const functionCollection = {
 ```
 
 When you get `/api/get`, your function gonna be randomly selected.
+
+
+___
+# Improve it 
+_The todo list_
+- Turn "give" and "giveMany" on POST
+- Deploy on docker
