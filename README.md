@@ -17,13 +17,11 @@ You can send random number generated from human source like tweet, reddit or mou
             let randomCollection = []
             let canSend = true
             document.addEventListener("mousemove", async (evt) => {
-                console.log("x : " + evt.clientX + " | y : " + evt.clientY)
                 randomCollection.push(String(parseInt(Math.random() * parseInt(evt.clientY + evt.clientX / 10))))
                 if(randomCollection.length === 150 && canSend) {
                     canSend = false
                     randomCollectionString = randomCollection.join("-")
                     await fetch("/api/giveMany?numbers="+randomCollectionString).then((res) => {
-                        console.log(res)
                         canSend = true
                         randomCollection = []
                     })
