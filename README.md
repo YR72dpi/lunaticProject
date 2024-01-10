@@ -10,11 +10,37 @@ LunaticProject is a collaborative project for generating a random number from ot
 
 ## Random source
 
-Ideas : 
-- From x and y coordonate (re-randomised) mouth's move
-- From Tweet/redit converted in integer
+### Server 
 
-## One entry, one exit
+There already are many function with many different level of antropy.
+
+### Organic
+
+You can send random number generated from human source like tweet, reddit or mouse move with _give_ routes like that :
+
+```javascript
+ const randomMouse = () => {
+            let randomCollection = []
+            let canSend = true
+            document.addEventListener("mousemove", async (evt) => {
+                console.log("x : " + evt.clientX + " | y : " + evt.clientY)
+                randomCollection.push(String(parseInt(Math.random() * parseInt(evt.clientY + evt.clientX / 10))))
+                if(randomCollection.length === 150 && canSend) {
+                    canSend = false
+                    randomCollectionString = randomCollection.join("-")
+                    await fetch("/api/giveMany?numbers="+randomCollectionString).then((res) => {
+                        console.log(res)
+                        canSend = true
+                        randomCollection = []
+                    })
+                }
+            })
+        }
+    
+        randomMouse()
+```
+
+## How it works
 
 ```mermaid
 graph LR
