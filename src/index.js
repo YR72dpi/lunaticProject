@@ -14,7 +14,7 @@ const port = process.env.PORT;
 app.use('/api', router);
 app.get("/", async (req, res) => res.redirect(process.env.ENV === "dev" ? "dev" :"/api/get"))
 
-if (process.env.ENV === "dev") {
+if (process.env.ENV === "develop") {
   app.set("views", "views")
   app.set("view engine", "ejs")
   app.use(express.static('public'));
