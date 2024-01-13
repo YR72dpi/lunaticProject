@@ -135,7 +135,9 @@ const functionCollection = {
 
 When you get `/api/get`, your function gonna be randomly selected.
 
+___
 
+[TESTS](./tests.md)
 ___
 # Improve it 
 _The todo list_
