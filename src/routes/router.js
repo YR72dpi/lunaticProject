@@ -71,7 +71,7 @@ router.get('/get', async (req, res) => {
         ) {
             let min = parseInt(req.query.min)
             let max = parseInt(req.query.max)
-            console.log(min + " " + max)
+            // console.log(min + " " + max)
             while(randomNumber < min || randomNumber > max || randomNumber === undefined) {
                 if(req.query.function !== undefined && req.query.function !== "") {
                     functionSelected = req.query.function
@@ -79,10 +79,10 @@ router.get('/get', async (req, res) => {
                     let functionCollectionName = Object.keys(functionCollection)
                     functionSelected = functionCollectionName[await simpleRandom(0, functionCollectionName.length)]
                 }
-                console.log(functionSelected)
+                // console.log(functionSelected)
                 randomNumber = await functionCollection[functionSelected]()
-                console.log(randomNumber)
-                console.log("----------------------------------------------")
+                // console.log(randomNumber)
+                // console.log("----------------------------------------------")
             }
         }
 
