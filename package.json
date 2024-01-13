@@ -5,7 +5,7 @@
   "description": "LunaticProject est un projet collaboratif permettant de générer un nombre aléatoire à partir de d'autres nombres générés aléatoirement de manière organique et informatique Selon différents procédés généré par le serveur et par les utilisateurs.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node ./src/Command/timePerfCommand.js >timePerfCommand.txt",
     "start": "node ./src/index.js",
     "dev": "nodemon ./src/index.js",
     "start-up": "node ./src/Command/startUpCollection.js"
