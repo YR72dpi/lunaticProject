@@ -55,15 +55,40 @@ router.get('/get', async (req, res) => {
         if(req.query.function !== undefined && req.query.function !== "") {
             functionSelected = req.query.function
         } else {
-            const functionCollectionName = Object.keys(functionCollection)
+            let functionCollectionName = Object.keys(functionCollection)
             functionSelected = functionCollectionName[await simpleRandom(0, functionCollectionName.length)]
         }
 
-        const randomNumber = await functionCollection[functionSelected]()
+        let randomNumber;
+        while (randomNumber === undefined) {
+            randomNumber = await functionCollection[functionSelected]()
+        }
+
+        if(
+            req.query.min !== undefined
+            && req.query.max !== undefined
+            && req.query.min < req.query.max
+        ) {
+            let min = parseInt(req.query.min)
+            let max = parseInt(req.query.max)
+            console.log(min + " " + max)
+            while(randomNumber < min || randomNumber > max || randomNumber === undefined) {
+                if(req.query.function !== undefined && req.query.function !== "") {
+                    functionSelected = req.query.function
+                } else {
+                    let functionCollectionName = Object.keys(functionCollection)
+                    functionSelected = functionCollectionName[await simpleRandom(0, functionCollectionName.length)]
+                }
+                console.log(functionSelected)
+                randomNumber = await functionCollection[functionSelected]()
+                console.log(randomNumber)
+                console.log("----------------------------------------------")
+            }
+        }
 
         logger.info('[SERVER] GET /get : ' + functionSelected);
         res.json({
-            number: randomNumber,
+            number: parseInt(randomNumber),
             origin: functionSelected
         });
     } catch (error) {
