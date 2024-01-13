@@ -9,7 +9,6 @@ const nbrTest = 100
 
 const timePerfCommand = async (query = "") => {
 
-    let timeSum = 0
     let timeMax = 0
     let timeMin = 0
     let timeDeltaCollection = []
@@ -23,7 +22,6 @@ const timePerfCommand = async (query = "") => {
         const end = Date.now()
 
         const deltaTime = end - start
-        timeSum += deltaTime
         timeDeltaCollection.push(deltaTime)
         
         if(i === 1) {
@@ -38,7 +36,7 @@ const timePerfCommand = async (query = "") => {
     console.log("---- ----")
     console.log("QUERY : /api/get" + (query == "" ? "No query" : query))
     console.log("Number of query : " + nbrTest)
-    console.log("MOY : " + (timeSum/timeDeltaCollection.length) + " ms")
+    console.log("MOY : " + ((timeMin+timeMax)/2) + " ms")
     console.log("MIN : " + timeMin + " ms")
     console.log("MAX : " + timeMax + " ms")
 }

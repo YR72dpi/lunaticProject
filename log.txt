@@ -1,0 +1,60 @@
+---- ----
+QUERY : /api/getNo query
+Number of query : 100
+MOY : 34.5 ms
+MIN : 1 ms
+MAX : 68 ms
+---- ----
+QUERY : /api/get?min=1&max=10
+Number of query : 100
+MOY : 369.5 ms
+MIN : 2 ms
+MAX : 737 ms
+---- ----
+QUERY : /api/get?function=numberFromDb
+Number of query : 100
+MOY : 68 ms
+MIN : 6 ms
+MAX : 130 ms
+---- ----
+QUERY : /api/get?function=simpleRandom
+Number of query : 100
+MOY : 2 ms
+MIN : 1 ms
+MAX : 3 ms
+---- ----
+QUERY : /api/get?function=crossRandom
+Number of query : 100
+MOY : 2 ms
+MIN : 1 ms
+MAX : 3 ms
+---- ----
+QUERY : /api/get?function=randomLowEntropy
+Number of query : 100
+MOY : 2.5 ms
+MIN : 1 ms
+MAX : 4 ms
+---- ----
+QUERY : /api/get?function=randomMediumEntropy
+Number of query : 100
+MOY : 2 ms
+MIN : 0 ms
+MAX : 4 ms
+---- ----
+QUERY : /api/get?function=randomHighEntropy
+Number of query : 100
+MOY : 1.5 ms
+MIN : 0 ms
+MAX : 3 ms
+---- ----
+QUERY : /api/get?function=generateRandomNumberFromTimestamp
+Number of query : 100
+MOY : 2 ms
+MIN : 0 ms
+MAX : 4 ms
+---- ----
+QUERY : /api/get?function=vonNeumannRandom
+Number of query : 100
+MOY : 2 ms
+MIN : 1 ms
+MAX : 3 ms
