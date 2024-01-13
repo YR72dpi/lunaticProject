@@ -110,15 +110,3 @@ export const vonNeumannRandom = async (seed = null, length = 3) =>{
   
     return scaledResult;
   }
-
-export const timestampAntropyRandom = async () => {
-
-    const before = Date.now()
-    await fetch(process.env.FETCH_TIMESTAMP)
-    const random = await simpleRandom()
-    const after = Date.now()
-    
-    const deltaTimestamp = after - before
-    const result = random * deltaTimestamp
-    return result
-}
