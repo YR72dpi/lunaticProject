@@ -32,6 +32,8 @@ You can send random number generated from human source like tweet, reddit or mou
         randomMouse()
 ```
 
+I had an idea: get the white noise from the radio (with an rtl-srd for example) and use it as a seed. 
+
 ## How it works
 
 ```mermaid
