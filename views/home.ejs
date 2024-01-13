@@ -145,7 +145,6 @@
                     })
                 </script>
             </aside>
-            </aside>
             <aside>
                 <h3>GIVE many</h3>
                 <p><small>/api/giveMany?numbers=<span id="randomToGiveMany"></span></small></p>
@@ -184,6 +183,37 @@
                         })
                     })
                 </script>
+            </aside>
+        </section>
+        <section>
+        
+            <aside>
+                <h3>Testing mouse randon</h3>
+                    <div>
+                        <input type="checkbox" id="enableMouseListen"/>
+                        <label for="enable">Enable</label>
+                      </div>
+
+                      <script>
+                        const randomMouse = () => {
+                            let randomCollection = []
+                            let canSend = true
+                            document.addEventListener("mousemove", async (evt) => {
+                                if(document.getElementById("enableMouseListen").checked) {
+                                    randomCollection.push(String(parseInt(Math.random() * parseInt(evt.clientY + evt.clientX / 10))))
+                                    if(randomCollection.length === 150 && canSend) {
+                                        canSend = false
+                                        randomCollectionString = randomCollection.join("-")
+                                        await fetch("/api/giveMany?numbers="+randomCollectionString).then((res) => {
+                                            canSend = true
+                                            randomCollection = []
+                                        })
+                                    }
+                                }
+                            })
+                        }    
+                        randomMouse()                
+                      </script>
             </aside>
         </section>
     </main>
