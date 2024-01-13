@@ -80,6 +80,8 @@ graph LR
 [DOMAIN]/api/get
 // Get from a specific function
 [DOMAIN]/api/get?function=simpleRandom
+// Get with min and max value
+[DOMAIN]/api/get?min=0&max=10
 ```
 
 ## Installation
