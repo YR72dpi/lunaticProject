@@ -84,14 +84,15 @@ graph LR
 [DOMAIN]/api/get?min=0&max=10
 ```
 
-## Installation
+## Install
 
 Run the docker compose.
 
 At installatoin, 1k numbers gonna be generate by server.
 
-```
+```shell
 sudo docker compose up
+npm install
 npm run start
 npm run start-up
 ```
