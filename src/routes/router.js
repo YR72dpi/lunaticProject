@@ -9,7 +9,7 @@ import {
     randomMediumEntropy,
     randomHighEntropy,
     generateRandomNumberFromTimestamp,
-    vonNeumannRandom,
+    // vonNeumannRandom,
 } from '../randomSrc/randomServer.js';
 import {
     randomNumberApi,
@@ -31,7 +31,7 @@ const functionCollection = {
     randomMediumEntropy,
     randomHighEntropy,
     generateRandomNumberFromTimestamp,
-    vonNeumannRandom,
+    // vonNeumannRandom,
 
     // From external source (fetch)
     // randomNumberApi,
