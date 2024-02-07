@@ -8,21 +8,29 @@ config()
 const prisma = new PrismaClient()
 const x = process.env.START_NUMBER_QUANTITY/2
 
-export const numberFromDb = async () => {
+export const numberFromDb = async (min = null, max = null) => {
     try {
         let numberCollection = await prisma.number.findMany()
         numberCollection = Object.entries(numberCollection)
         
         if (numberCollection.length > x) {
-            let selectionNumber = await simpleRandom(0, numberCollection.length-1)
+            let randomNumber;
+            let id;
+            do {
+                let selectionNumber = await simpleRandom(0, numberCollection.length-1)
 
-            const id = numberCollection[selectionNumber][1].id
+                id = numberCollection[selectionNumber][1].id
+                randomNumber = numberCollection[selectionNumber][1].number
+            } while(randomNumber < min && randomNumber > max)
+
             await prisma.number.delete({
                 where: {
                     id: id,
                 },
             })
-            return numberCollection[selectionNumber][1].number
+
+            return randomNumber;
+
         } else {
             logger.log("info", "[SERVER] Not enough numbers in the database. Adding " + String(x))
 

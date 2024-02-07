@@ -60,9 +60,7 @@ router.get('/get', async (req, res) => {
         }
 
         let randomNumber;
-        while (randomNumber === undefined) {
-            randomNumber = await functionCollection[functionSelected]()
-        }
+        
 
         if(
             req.query.min !== undefined
@@ -71,7 +69,6 @@ router.get('/get', async (req, res) => {
         ) {
             let min = parseInt(req.query.min)
             let max = parseInt(req.query.max)
-            // console.log(min + " " + max)
             while(randomNumber < min || randomNumber > max || randomNumber === undefined) {
                 if(req.query.function !== undefined && req.query.function !== "") {
                     functionSelected = req.query.function
@@ -79,11 +76,10 @@ router.get('/get', async (req, res) => {
                     let functionCollectionName = Object.keys(functionCollection)
                     functionSelected = functionCollectionName[await simpleRandom(0, functionCollectionName.length)]
                 }
-                // console.log(functionSelected)
-                randomNumber = await functionCollection[functionSelected]()
-                // console.log(randomNumber)
-                // console.log("----------------------------------------------")
+                randomNumber = await functionCollection[functionSelected](min, max)
             }
+        } else {
+            randomNumber = await functionCollection[functionSelected]()
         }
 
         logger.info('[SERVER] GET /get : ' + functionSelected);
@@ -129,7 +125,6 @@ router.get('/giveMany', async (req, res) => {
         logger.info('[ORGANIC] GET /giveMany?numbers=x-y-z');
 
         const randomNumber = req.query.numbers.split("-");
-            console.log(randomNumber)
         let onlyIntegerGiven = true;
         randomNumber.forEach(async (number) => {
             number = parseInt(number)
