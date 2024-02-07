@@ -103,34 +103,33 @@ export const generateRandomNumberFromTimestamp = async (min = null, max = null) 
   return parseInt(randomNumber);
 }
 
-export const vonNeumannRandom = async (min = 0, max = 99999, seed = null, length = 3) =>{
-  let currentSeed;
-  if (seed === null) {
-      do {
-          currentSeed = await simpleRandom(min, max);
-      } while (currentSeed < min || currentSeed > max);
-  } else {
-      currentSeed = seed.toString();
-  }
+// export const vonNeumannRandom = async (min = 0, max = 99999, seed = null, length = 3) =>{
+//   let currentSeed;
+//   if (seed === null) {
+//       do {
+//           currentSeed = await simpleRandom(min, max);
+//       } while (currentSeed < min || currentSeed > max);
+//   } else {
+//       currentSeed = seed.toString();
+//   }
 
-  let result = '';
+//   let result = '';
 
-  for (let i = 0; i < length; i++) {
-      // Square the current seed
-      currentSeed = (parseInt(currentSeed) ** 2).toString();
+//   for (let i = 0; i < length; i++) {
+//       // Square the current seed
+//       currentSeed = (parseInt(currentSeed) ** 2).toString();
   
-      // Extract the middle digits
-      const middleIndex = Math.floor(currentSeed.length / 2);
-      const middleDigits = currentSeed.slice(middleIndex - 1, middleIndex + 1);
+//       // Extract the middle digits
+//       const middleIndex = Math.floor(currentSeed.length / 2);
+//       const middleDigits = currentSeed.slice(middleIndex - 1, middleIndex + 1);
   
-      // Append the middle digits to the result
-      result += middleDigits;
-  }
+//       // Append the middle digits to the result
+//       result += middleDigits;
+//   }
   
-  // Convert the result to a number and scale it between 0 and 1
-  // const scaledResult = parseInt(result) / Math.pow(10, result.length);
-  const scaledResult = parseInt(result);
+//   // Convert the result to a number and scale it between 0 and 1
+//   // const scaledResult = parseInt(result) / Math.pow(10, result.length);
+//   const scaledResult = parseInt(result);
   
-  return scaledResult;
-}
-  console.log(await vonNeumannRandom(0, 250))
+//   return scaledResult;
+// }
